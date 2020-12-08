@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HRMSdbModelStoreContainer" CdmEntityContainer="HRMSdbContext1">
+    <EntitySetMapping Name="departments">
+      <EntityTypeMapping TypeName="HRMSdbModel.department">
+        <MappingFragment StoreEntitySet="department">
+          <ScalarProperty Name="deptId" ColumnName="deptId" />
+          <ScalarProperty Name="deptName" ColumnName="deptName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="designations">
+      <EntityTypeMapping TypeName="HRMSdbModel.designation">
+        <MappingFragment StoreEntitySet="designation">
+          <ScalarProperty Name="desigId" ColumnName="desigId" />
+          <ScalarProperty Name="desigName" ColumnName="desigName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="employees">
+      <EntityTypeMapping TypeName="HRMSdbModel.employee">
+        <MappingFragment StoreEntitySet="employee">
+          <ScalarProperty Name="empId" ColumnName="empId" />
+          <ScalarProperty Name="empName" ColumnName="empName" />
+          <ScalarProperty Name="empPhone" ColumnName="empPhone" />
+          <ScalarProperty Name="empEmail" ColumnName="empEmail" />
+          <ScalarProperty Name="empAddress" ColumnName="empAddress" />
+          <ScalarProperty Name="joiningDate" ColumnName="joiningDate" />
+          <ScalarProperty Name="empIsActive" ColumnName="empIsActive" />
+          <ScalarProperty Name="empGender" ColumnName="empGender" />
+          <ScalarProperty Name="empSkill" ColumnName="empSkill" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="payrolls">
+      <EntityTypeMapping TypeName="HRMSdbModel.payroll">
+        <MappingFragment StoreEntitySet="payroll">
+          <ScalarProperty Name="payrollId" ColumnName="payrollId" />
+          <ScalarProperty Name="month" ColumnName="month" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="payslips">
+      <EntityTypeMapping TypeName="HRMSdbModel.payslip">
+        <MappingFragment StoreEntitySet="payslip">
+          <ScalarProperty Name="payslipId" ColumnName="payslipId" />
+          <ScalarProperty Name="payslipDate" ColumnName="payslipDate" />
+          <ScalarProperty Name="addition" ColumnName="addition" />
+          <ScalarProperty Name="deduction" ColumnName="deduction" />
+          <ScalarProperty Name="genarate" ColumnName="genarate" />
+          <ScalarProperty Name="basic" ColumnName="basic" />
+          <ScalarProperty Name="ca" ColumnName="ca" />
+          <ScalarProperty Name="ha" ColumnName="ha" />
+          <ScalarProperty Name="salId" ColumnName="salId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="salaries">
+      <EntityTypeMapping TypeName="HRMSdbModel.salary">
+        <MappingFragment StoreEntitySet="salary">
+          <ScalarProperty Name="salId" ColumnName="salId" />
+          <ScalarProperty Name="salDate" ColumnName="salDate" />
+          <ScalarProperty Name="basic" ColumnName="basic" />
+          <ScalarProperty Name="ca" ColumnName="ca" />
+          <ScalarProperty Name="ha" ColumnName="ha" />
+          <ScalarProperty Name="empId" ColumnName="empId" />
+          <ScalarProperty Name="isActive" ColumnName="isActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="HRMSdbModel.user">
+        <MappingFragment StoreEntitySet="user">
+          <ScalarProperty Name="empId" ColumnName="empId" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usertypes">
+      <EntityTypeMapping TypeName="HRMSdbModel.usertype">
+        <MappingFragment StoreEntitySet="usertype">
+          <ScalarProperty Name="utypeId" ColumnName="utypeId" />
+          <ScalarProperty Name="utypeName" ColumnName="utypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="empdept" TypeName="HRMSdbModel.empdept" StoreEntitySet="empdept">
+      <EndProperty Name="department">
+        <ScalarProperty Name="deptId" ColumnName="deptId" />
+      </EndProperty>
+      <EndProperty Name="employee">
+        <ScalarProperty Name="empId" ColumnName="empId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="empdesig" TypeName="HRMSdbModel.empdesig" StoreEntitySet="empdesig">
+      <EndProperty Name="designation">
+        <ScalarProperty Name="desigId" ColumnName="desigId" />
+      </EndProperty>
+      <EndProperty Name="employee">
+        <ScalarProperty Name="empId" ColumnName="empId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="emputype" TypeName="HRMSdbModel.emputype" StoreEntitySet="emputype">
+      <EndProperty Name="employee">
+        <ScalarProperty Name="empId" ColumnName="empId" />
+      </EndProperty>
+      <EndProperty Name="usertype">
+        <ScalarProperty Name="utypeId" ColumnName="utypeId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="paypay" TypeName="HRMSdbModel.paypay" StoreEntitySet="paypay">
+      <EndProperty Name="payroll">
+        <ScalarProperty Name="payrollId" ColumnName="payrollId" />
+      </EndProperty>
+      <EndProperty Name="payslip">
+        <ScalarProperty Name="payslipId" ColumnName="payslipId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

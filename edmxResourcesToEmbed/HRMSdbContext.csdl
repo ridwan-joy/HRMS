@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HRMSdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="department">
+    <Key>
+      <PropertyRef Name="deptId" />
+    </Key>
+    <Property Name="deptId" Type="Int32" Nullable="false" />
+    <Property Name="deptName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="employees" Relationship="Self.empdept" FromRole="department" ToRole="employee" />
+  </EntityType>
+  <EntityType Name="designation">
+    <Key>
+      <PropertyRef Name="desigId" />
+    </Key>
+    <Property Name="desigId" Type="Int32" Nullable="false" />
+    <Property Name="desigName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="employees" Relationship="Self.empdesig" FromRole="designation" ToRole="employee" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="empId" />
+    </Key>
+    <Property Name="empId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="empName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="empPhone" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="empEmail" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="empAddress" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="joiningDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="empIsActive" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="empGender" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="empSkill" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="salaries" Relationship="Self.FK_salary_employee" FromRole="employee" ToRole="salary" />
+    <NavigationProperty Name="user" Relationship="Self.FK_user_employee" FromRole="employee" ToRole="user" />
+    <NavigationProperty Name="department" Relationship="Self.empdept" FromRole="employee" ToRole="department" />
+    <NavigationProperty Name="designation" Relationship="Self.empdesig" FromRole="employee" ToRole="designation" />
+    <NavigationProperty Name="usertype" Relationship="Self.emputype" FromRole="employee" ToRole="usertype" />
+  </EntityType>
+  <EntityType Name="payroll">
+    <Key>
+      <PropertyRef Name="payrollId" />
+    </Key>
+    <Property Name="payrollId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="month" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="year" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="total" Type="Double" Nullable="false" />
+    <Property Name="status" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="payslips" Relationship="Self.paypay" FromRole="payroll" ToRole="payslip" />
+  </EntityType>
+  <EntityType Name="payslip">
+    <Key>
+      <PropertyRef Name="payslipId" />
+    </Key>
+    <Property Name="payslipId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="payslipDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="addition" Type="Double" Nullable="false" />
+    <Property Name="deduction" Type="Double" Nullable="false" />
+    <Property Name="genarate" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="basic" Type="Double" Nullable="false" />
+    <Property Name="ca" Type="Double" Nullable="false" />
+    <Property Name="ha" Type="Double" Nullable="false" />
+    <Property Name="salId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="salary" Relationship="Self.FK_payslip_salary" FromRole="payslip" ToRole="salary" />
+    <NavigationProperty Name="payrolls" Relationship="Self.paypay" FromRole="payslip" ToRole="payroll" />
+  </EntityType>
+  <EntityType Name="salary">
+    <Key>
+      <PropertyRef Name="salId" />
+    </Key>
+    <Property Name="salId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="salDate" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="basic" Type="Double" Nullable="false" />
+    <Property Name="ca" Type="Double" Nullable="false" />
+    <Property Name="ha" Type="Double" Nullable="false" />
+    <Property Name="empId" Type="Int32" Nullable="false" />
+    <Property Name="isActive" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="employee" Relationship="Self.FK_salary_employee" FromRole="salary" ToRole="employee" />
+    <NavigationProperty Name="payslips" Relationship="Self.FK_payslip_salary" FromRole="salary" ToRole="payslip" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="empId" />
+    </Key>
+    <Property Name="empId" Type="Int32" Nullable="false" />
+    <Property Name="userId" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pass" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="employee" Relationship="Self.FK_user_employee" FromRole="user" ToRole="employee" />
+  </EntityType>
+  <EntityType Name="usertype">
+    <Key>
+      <PropertyRef Name="utypeId" />
+    </Key>
+    <Property Name="utypeId" Type="Int32" Nullable="false" />
+    <Property Name="utypeName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="employees" Relationship="Self.emputype" FromRole="usertype" ToRole="employee" />
+  </EntityType>
+  <Association Name="FK_salary_employee">
+    <End Role="employee" Type="Self.employee" Multiplicity="1" />
+    <End Role="salary" Type="Self.salary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="empId" />
+      </Principal>
+      <Dependent Role="salary">
+        <PropertyRef Name="empId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_user_employee">
+    <End Role="employee" Type="Self.employee" Multiplicity="1" />
+    <End Role="user" Type="Self.user" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="empId" />
+      </Principal>
+      <Dependent Role="user">
+        <PropertyRef Name="empId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_payslip_salary">
+    <End Role="salary" Type="Self.salary" Multiplicity="1" />
+    <End Role="payslip" Type="Self.payslip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="salary">
+        <PropertyRef Name="salId" />
+      </Principal>
+      <Dependent Role="payslip">
+        <PropertyRef Name="salId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="empdept">
+    <End Role="department" Type="Self.department" Multiplicity="0..1" />
+    <End Role="employee" Type="Self.employee" Multiplicity="*" />
+  </Association>
+  <Association Name="empdesig">
+    <End Role="designation" Type="Self.designation" Multiplicity="0..1" />
+    <End Role="employee" Type="Self.employee" Multiplicity="*" />
+  </Association>
+  <Association Name="emputype">
+    <End Role="employee" Type="Self.employee" Multiplicity="*" />
+    <End Role="usertype" Type="Self.usertype" Multiplicity="0..1" />
+  </Association>
+  <Association Name="paypay">
+    <End Role="payroll" Type="Self.payroll" Multiplicity="*" />
+    <End Role="payslip" Type="Self.payslip" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="HRMSdbContext1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="departments" EntityType="Self.department" />
+    <EntitySet Name="designations" EntityType="Self.designation" />
+    <EntitySet Name="employees" EntityType="Self.employee" />
+    <EntitySet Name="payrolls" EntityType="Self.payroll" />
+    <EntitySet Name="payslips" EntityType="Self.payslip" />
+    <EntitySet Name="salaries" EntityType="Self.salary" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <EntitySet Name="usertypes" EntityType="Self.usertype" />
+    <AssociationSet Name="FK_salary_employee" Association="Self.FK_salary_employee">
+      <End Role="employee" EntitySet="employees" />
+      <End Role="salary" EntitySet="salaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_user_employee" Association="Self.FK_user_employee">
+      <End Role="employee" EntitySet="employees" />
+      <End Role="user" EntitySet="users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_payslip_salary" Association="Self.FK_payslip_salary">
+      <End Role="salary" EntitySet="salaries" />
+      <End Role="payslip" EntitySet="payslips" />
+    </AssociationSet>
+    <AssociationSet Name="empdept" Association="Self.empdept">
+      <End Role="department" EntitySet="departments" />
+      <End Role="employee" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="empdesig" Association="Self.empdesig">
+      <End Role="designation" EntitySet="designations" />
+      <End Role="employee" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="emputype" Association="Self.emputype">
+      <End Role="employee" EntitySet="employees" />
+      <End Role="usertype" EntitySet="usertypes" />
+    </AssociationSet>
+    <AssociationSet Name="paypay" Association="Self.paypay">
+      <End Role="payroll" EntitySet="payrolls" />
+      <End Role="payslip" EntitySet="payslips" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
